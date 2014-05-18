@@ -11,26 +11,22 @@ Option Explicit
 
 Private Sub cmdRunTheDemo_Click()
     Dim inputIsValid As Boolean
-    Dim targetRange As Range
     Dim userInput As String
-    
-    Set targetRange = Me.Range("A6")    ' Arbitrary cell.
 
     inputIsValid = False
     Do Until inputIsValid
         userInput = InputBox("Please enter a number.")
         
-        ' If the user clicked Cancel (or typed nothing in the text box), exit
-        ' the loop.
-        If userInput = "" Then Exit Do
+        ' Exit if the user clicked Cancel or typed nothing in the text box.
+        If userInput = "" Then Exit Sub
         
         If IsNumeric(userInput) Then
             inputIsValid = True
-            targetRange.Value = CDbl(userInput)
         Else
             MsgBox "Invalid input.  Please try again.", vbCritical
         End If
     Loop
     
-    Set targetRange = Nothing
+    ' Write to an arbitrary cell.
+    Me.Range("A6").Value = CDbl(userInput)
 End Sub
